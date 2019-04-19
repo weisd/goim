@@ -26,3 +26,6 @@ Thumbs.db
 /target
 /configs
 /dist
+
+coverage.txt
+profile.out

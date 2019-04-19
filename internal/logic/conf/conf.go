@@ -9,6 +9,8 @@ import (
 	"github.com/Bilibili/discovery/naming"
 	xtime "github.com/Terry-Mao/goim/pkg/time"
 
+	"github.com/Terry-Mao/goim/internal/broker"
+
 	"github.com/BurntSushi/toml"
 )
 
@@ -82,6 +84,8 @@ type Config struct {
 	Node       *Node
 	Backoff    *Backoff
 	Regions    map[string][]string
+	Broker string
+	BrokerOption broker.Options
 }
 
 // Env is env config.

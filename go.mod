@@ -3,7 +3,7 @@ module github.com/Terry-Mao/goim
 require (
 	github.com/Bilibili/discovery v0.0.0-20181031105343-06a9e867cd84
 	github.com/BurntSushi/toml v0.3.1
-	github.com/Shopify/sarama v1.19.0 // indirect
+	github.com/Shopify/sarama v1.19.0
 	github.com/bsm/sarama-cluster v2.1.15+incompatible
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/eapache/go-resiliency v1.1.0 // indirect
@@ -20,6 +20,8 @@ require (
 	github.com/issue9/assert v1.0.0
 	github.com/jtolds/gls v4.2.1+incompatible // indirect
 	github.com/mattn/go-isatty v0.0.4 // indirect
+	github.com/onsi/ginkgo v1.8.0 // indirect
+	github.com/onsi/gomega v1.5.0 // indirect
 	github.com/pierrec/lz4 v2.0.5+incompatible // indirect
 	github.com/pkg/errors v0.8.0
 	github.com/pmezard/go-difflib v1.0.0 // indirect
