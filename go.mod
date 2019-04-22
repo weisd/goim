@@ -31,6 +31,7 @@ require (
 	github.com/stretchr/testify v1.2.2
 	github.com/thinkboy/log4go v0.0.0-20160303045050-f91a411e4a18
 	github.com/ugorji/go/codec v0.0.0-20181209151446-772ced7fd4c2 // indirect
+	github.com/youzan/go-nsq v1.3.1
 	github.com/zhenjl/cityhash v0.0.0-20131128155616-cdd6a94144ab
 	golang.org/x/net v0.0.0-20181011144130-49bb7cea24b1
 	google.golang.org/grpc v1.16.0
