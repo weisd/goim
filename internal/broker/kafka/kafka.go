@@ -21,6 +21,7 @@ type Broker struct {
 	producer sarama.SyncProducer
 	consumer *cluster.Consumer
 	ctx      context.Context
+	cancel   context.CancelFunc
 }
 
 // NewBroker NewBroker
@@ -33,13 +34,18 @@ func (p *Broker) Init(o broker.Options) error {
 
 	p.opt = o
 
+	ctx, cancel := context.WithCancel(context.Background())
+
+	p.ctx = ctx
+	p.cancel = cancel
+
 	return p.Connect()
 }
 
 // Connect Connect
 func (p *Broker) Connect() error {
 	if p.opt.IsCunsumer {
-		if err := p.initProducer(); err != nil {
+		if err := p.initConsumer(); err != nil {
 			return err
 		}
 		return nil
@@ -141,6 +147,8 @@ func (p *Broker) Close() error {
 	if p.producer != nil {
 		p.producer.Close()
 	}
+
+	p.cancel()
 
 	return nil
 }

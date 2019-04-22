@@ -18,6 +18,9 @@ import (
 	"github.com/Terry-Mao/goim/internal/logic/model"
 	"github.com/Terry-Mao/goim/pkg/ip"
 	log "github.com/golang/glog"
+
+	_ "github.com/Terry-Mao/goim/internal/broker/kafka"
+	_ "github.com/Terry-Mao/goim/internal/broker/youzan-nsq"
 )
 
 const (

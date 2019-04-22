@@ -6,6 +6,12 @@ Broker = "kafka"
     topic = "goim-push-topic"
     addrs = ["127.0.0.1:9092"]
 
+# Broker = "youzan-nsq"
+
+# [BrokerOption]
+#     topic = "goim-push-topic"
+#     addrs = ["127.0.0.1:4161"]
+
 [discovery]
     nodes = ["127.0.0.1:7171"]
 

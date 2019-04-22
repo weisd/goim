@@ -1,4 +1,13 @@
 # This is a TOML document. Boom
+# Broker = "youzan-nsq"
+
+# [BrokerOption]
+#     topic = "goim-push-topic"
+#     addrs = ["127.0.0.1:4161"]
+#     AutoAck = true
+#     IsCunsumer = true
+#     Group = "goim-test"
+
 Broker = "kafka"
 
 [BrokerOption]

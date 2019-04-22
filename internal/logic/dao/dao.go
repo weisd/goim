@@ -12,8 +12,7 @@ import (
 
 // Dao dao.
 type Dao struct {
-	c *conf.Config
-	// kafkaPub    kafka.SyncProducer
+	c           *conf.Config
 	broker      broker.Broker
 	redis       *redis.Pool
 	redisExpire int32
@@ -23,8 +22,7 @@ type Dao struct {
 func New(c *conf.Config) *Dao {
 
 	d := &Dao{
-		c: c,
-		// kafkaPub:    newKafkaPub(c.Kafka),
+		c:           c,
 		broker:      newBroker(c),
 		redis:       newRedis(c.Redis),
 		redisExpire: int32(time.Duration(c.Redis.Expire) / time.Second),
@@ -39,7 +37,10 @@ func newBroker(c *conf.Config) broker.Broker {
 		panic("broker not found")
 	}
 
-	b.Init(c.BrokerOption)
+	err := b.Init(c.BrokerOption)
+	if err != nil {
+		panic(err)
+	}
 
 	return b
 }

@@ -12,6 +12,9 @@ import (
 
 	resolver "github.com/Bilibili/discovery/naming/grpc"
 	log "github.com/golang/glog"
+
+	_ "github.com/Terry-Mao/goim/internal/broker/kafka"
+	_ "github.com/Terry-Mao/goim/internal/broker/youzan-nsq"
 )
 
 var (

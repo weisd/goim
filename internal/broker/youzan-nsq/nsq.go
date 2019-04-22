@@ -2,6 +2,7 @@ package nsq
 
 import (
 	"github.com/Terry-Mao/goim/internal/broker"
+	"github.com/spaolacci/murmur3"
 	nsq "github.com/youzan/go-nsq"
 )
 
@@ -31,6 +32,7 @@ func (p *Broker) Init(opt broker.Options) error {
 		config := nsq.NewConfig()
 		// 启用顺序消费
 		config.EnableOrdered = true
+		config.Hasher = murmur3.New32()
 
 		consumer, err := nsq.NewConsumer(p.opt.Topic, p.opt.Group, config)
 		if err != nil {
@@ -46,11 +48,18 @@ func (p *Broker) Init(opt broker.Options) error {
 
 	config.EnableOrdered = true
 
-	topics := []string{p.opt.Topic}
+	config.Hasher = murmur3.New32()
 
-	pubMgr, err := nsq.NewTopicProducerMgr(topics, config)
+	// topics := []string{p.opt.Topic}
+
+	pubMgr, err := nsq.NewTopicProducerMgr([]string{}, config)
 	if err != nil {
 
+		return err
+	}
+
+	err = pubMgr.ConnectToNSQLookupd(p.opt.Addrs[0])
+	if err != nil {
 		return err
 	}
 
@@ -64,6 +73,7 @@ func (p *Broker) Init(opt broker.Options) error {
 // Publish Publish
 func (p *Broker) Publish(message []byte) error {
 	_, _, _, err := p.producer.PublishOrdered(p.opt.Topic, []byte{'1'}, message)
+	// err := p.producer.Publish(p.opt.Topic, message)
 
 	return err
 }

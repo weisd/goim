@@ -7,6 +7,7 @@ import (
 
 	"github.com/Bilibili/discovery/naming"
 	"github.com/BurntSushi/toml"
+	"github.com/Terry-Mao/goim/internal/broker"
 	xtime "github.com/Terry-Mao/goim/pkg/time"
 )
 
@@ -59,6 +60,9 @@ type Config struct {
 	Discovery *naming.Config
 	Comet     *Comet
 	Room      *Room
+
+	Broker       string
+	BrokerOption broker.Options
 }
 
 // Room is room config.

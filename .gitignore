@@ -29,3 +29,7 @@ Thumbs.db
 
 coverage.txt
 profile.out
+
+/vendor/
+
+dump.rdb
