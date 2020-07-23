@@ -6,9 +6,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Bilibili/discovery/naming"
 	pb "github.com/Terry-Mao/goim/api/logic/grpc"
 	"github.com/Terry-Mao/goim/internal/job/conf"
+	"github.com/bilibili/discovery/naming"
 	"github.com/gogo/protobuf/proto"
 
 	"github.com/Terry-Mao/goim/internal/broker"
@@ -96,7 +96,7 @@ func (j *Job) watchComet(c *naming.Config) {
 			panic("watchComet init failed")
 		}
 		if ins, ok := resolver.Fetch(); ok {
-			if err := j.newAddress(ins); err != nil {
+			if err := j.newAddress(ins.Instances); err != nil {
 				panic(err)
 			}
 			log.Infof("watchComet init newAddress:%+v", ins)
@@ -112,7 +112,7 @@ func (j *Job) watchComet(c *naming.Config) {
 			}
 			ins, ok := resolver.Fetch()
 			if ok {
-				if err := j.newAddress(ins); err != nil {
+				if err := j.newAddress(ins.Instances); err != nil {
 					log.Errorf("watchComet newAddress(%+v) error(%+v)", ins, err)
 					continue
 				}
