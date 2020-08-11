@@ -1,6 +1,7 @@
 # Go parameters
 GOCMD=GO111MODULE=on go
 GOBUILD=$(GOCMD) build
+GOBUILD_LINUX=GO111MODULE=on GOOS=linux go build --mod=vendor
 GOTEST=$(GOCMD) test
 
 all: test build
@@ -13,6 +14,19 @@ build:
 	$(GOBUILD) -o target/comet cmd/comet/main.go
 	$(GOBUILD) -o target/logic cmd/logic/main.go
 	$(GOBUILD) -o target/job cmd/job/main.go
+
+linux:
+	rm -rf target/
+	mkdir target/
+	cp cmd/comet/comet-example.toml target/comet.toml
+	cp cmd/logic/logic-example.toml target/logic.toml
+	cp cmd/job/job-example.toml target/job.toml
+	$(GOBUILD_LINUX) -o target/comet cmd/comet/main.go
+	$(GOBUILD_LINUX) -o target/logic cmd/logic/main.go
+	$(GOBUILD_LINUX) -o target/job cmd/job/main.go
+
+docker:
+	docker build -t goim .
 
 test:
 	$(GOTEST) -v ./...

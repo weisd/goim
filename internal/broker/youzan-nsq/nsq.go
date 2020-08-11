@@ -50,16 +50,9 @@ func (p *Broker) Init(opt broker.Options) error {
 
 	config.Hasher = murmur3.New32()
 
-	// topics := []string{p.opt.Topic}
-
-	pubMgr, err := nsq.NewTopicProducerMgr([]string{}, config)
+	pubMgr, err := nsq.NewTopicProducerMgr([]string{p.opt.Topic}, config)
 	if err != nil {
 
-		return err
-	}
-
-	err = pubMgr.ConnectToNSQLookupd(p.opt.Addrs[0])
-	if err != nil {
 		return err
 	}
 
