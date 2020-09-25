@@ -110,6 +110,41 @@ message Backoff {
 	float	Jitter = 4 [(gogoproto.jsontag) = "jitter"];
 }
 
+
+
+message PushMsgReply {
+
+}
+
+// PushKeysReq op int32, keys []string, msg []byte
+message PushKeysReq {
+    int32 op = 1;
+    repeated string keys = 2;
+    bytes msg = 3;
+}
+
+// PushMidsReq op int32, mids []int64, msg []byte
+message PushMidsReq {
+    int32 op = 1;
+    repeated int64 mids = 2;
+    bytes msg = 3;
+}
+
+// PushRoomReq op int32, typ, room string, msg []byte
+message PushRoomReq {
+    int32 op = 1;
+    string typ = 2;
+    string room = 3;
+    bytes msg = 4;
+}
+
+// PushAllReq op, speed int32, msg []byte
+message PushAllReq {
+    int32 op = 1;
+    int32 speed = 2;
+    bytes msg = 3;
+}
+
 service Logic {
     // Ping Service 
     rpc Ping(PingReq) returns(PingReply);
@@ -126,5 +161,13 @@ service Logic {
     // Receive
     rpc Receive(ReceiveReq) returns (ReceiveReply);
 	//ServerList
-	rpc Nodes(NodesReq) returns (NodesReply);
+    rpc Nodes(NodesReq) returns (NodesReply);
+    // PushKeys 按keys发消息
+    rpc PushKeys(PushKeysReq) returns (PushMsgReply);
+    // PushMids 按mid发消息
+    rpc PushMids(PushMidsReq) returns (PushMsgReply);
+    // PushRoom 按room发消息
+    rpc PushRoom(PushRoomReq) returns (PushMsgReply);
+    // PushAll 广播
+    rpc PushAll(PushAllReq) returns (PushMsgReply);
 }

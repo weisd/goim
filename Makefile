@@ -43,3 +43,7 @@ stop:
 	pkill -f target/logic
 	pkill -f target/job
 	pkill -f target/comet
+
+
+protoc:
+	protoc --proto_path=/Users/weisd/go/src --proto_path=/Users/weisd/go/src/github.com/go-kratos/kratos/third_party --proto_path=./  --proto_path=./vendor  --gogofaster_out=plugins=grpc:. ./api/logic/grpc/api.proto
